@@ -5,7 +5,7 @@ const BooksList = (props) => {
   const { store } = props;
   const books = store.getState();
   return (books.map((book) => (
-    <Book book={book} />
+    <Book key={book.id} book={book} />
   )));
 };
 
