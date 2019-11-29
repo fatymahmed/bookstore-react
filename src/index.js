@@ -1,9 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import './index.css';
-import App from './App';
+import bookReducer from './reducers/book';
+import App from './components/app';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const ids = [];
+
+const generateUniqueId = () => {
+  let number =  Math.floor(Math.random() * 100);
+  while(ids.includes(number)){
+    number =  Math.floor(Math.random() * 100);
+  }
+  ids.push(number);
+  return number;
+}
+
+const initialsBooks = [{
+  id: generateUniqueId(),
+  title: 'Things fall apart',
+  category: 'Learning'
+},
+{
+  id: generateUniqueId(),
+  title: 'God Father',
+  category: 'History',
+}]
+
+const store = createStore(bookReducer, initialsBooks)
+
+ReactDOM.render(<Provider store={store}> <App store={store} />
+  </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
