@@ -4,12 +4,12 @@ import Book from './book';
 
 const BooksList = (props) => {
   const { books } = props;
-  return (books.map((book) => (
+  return (books.map(book => (
     <Book key={book.id} book={book} />
   )));
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   books: state.books,
 });
 

@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 const Book = (props) => {
   const { book } = props;
+  const { id, title, category } = book;
   return (
-    <div id={`book${book.id}`}>
-      <p>{book.title}</p>
-      <p>{book.category}</p>
+    <div id={`book${id}`}>
+      <p>{title}</p>
+      <p>{category}</p>
     </div>
   );
 };
