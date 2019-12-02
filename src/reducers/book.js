@@ -6,7 +6,7 @@ const books = (state = [], action) => {
     case CREATE_BOOK:
       return [...state, action.book];
     case REMOVE_BOOK:
-      return (state.filter((x) => x.id !== action.id));
+      return (state.filter(x => x.id !== action.id));
     default:
       return state;
   }

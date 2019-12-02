@@ -19,18 +19,18 @@ class BooksList extends React.Component {
 
   render() {
     const { books } = this.props;
-    return (books.map((book) => (
+    return (books.map(book => (
       <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
     )));
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   books: state.books,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeBook: (id) => dispatch(removeBook(id)),
+const mapDispatchToProps = dispatch => ({
+  removeBook: id => dispatch(removeBook(id)),
 });
 
 BooksList.propTypes = {
