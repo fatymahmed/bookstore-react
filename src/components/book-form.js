@@ -1,9 +1,11 @@
 import React from 'react';
-import { addBook } from '../actions/index';
-import generateUniqueId from '../index';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addBook } from '../actions/index';
+import generateUniqueId from '../idGenerator';
 
 const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
+
 class BooksForm extends React.Component {
   constructor(props) {
     super(props);
@@ -11,43 +13,47 @@ class BooksForm extends React.Component {
       title: '',
       category: categories[0],
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  handleChange(event) {
+    const { name, value } = event.target;
     this.setState({
-      [name]: value
-    })
+      [name]: value,
+    });
   }
 
-  createBook = () => {
+  createBook() {
+    const { title, category } = this.state;
     return {
-      title: this.state.title,
-      category: this.state.category,
-      id: generateUniqueId() 
-    }
+      title,
+      category,
+      id: generateUniqueId(),
+    };
   }
 
-  resetStates = () => {
+  resetStates() {
     this.setState({
       title: '',
-      category: categories[0]
-    })
+      category: categories[0],
+    });
   }
 
-  handleSubmit = (event) => {
-    this.props.addNewBook(this.createBook());
+  handleSubmit() {
+    console.log(this.props);
+    const { addNewBook } = this.props;
+    addNewBook(this.createBook());
     this.resetStates();
   }
 
   render() {
-    const { title, category } = this.state; 
+    const { title, category } = this.state;
     return (
       <form>
-        <input type="text" name='title' value={title} onChange={this.handleChange} />
+        <input type="text" name="title" value={title} onChange={this.handleChange} />
         <select name="category" value={category} onChange={this.handleChange}>
-          {categories.map(category => (
+          {categories.map((category) => (
             <option key={category}>
               {category}
             </option>
@@ -61,9 +67,11 @@ class BooksForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addNewBook: book => {dispatch(addBook(book))},
-  }
-}
-export default connect(null,mapDispatchToProps)(BooksForm);
+BooksForm.propTypes = {
+  addNewBook: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addNewBook: (book) => { dispatch(addBook(book)); },
+});
+export default connect(null, mapDispatchToProps)(BooksForm);
