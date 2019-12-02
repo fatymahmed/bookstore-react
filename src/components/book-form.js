@@ -1,5 +1,5 @@
 import React from 'react';
-import { addBook, removeBook} from '../actions/index';
+import { addBook } from '../actions/index';
 import generateUniqueId from '../index';
 import { connect } from 'react-redux';
 
@@ -48,7 +48,7 @@ class BooksForm extends React.Component {
         <input type="text" name='title' value={title} onChange={this.handleChange} />
         <select name="category" value={category} onChange={this.handleChange}>
           {categories.map(category => (
-            <option key={category.id}>
+            <option key={category}>
               {category}
             </option>
           ))}
@@ -61,10 +61,9 @@ class BooksForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    addNewBook: (book) => {dispatch(addBook(book))},
-    removeBook: (id) => {dispatch(removeBook(id))}
+    addNewBook: book => {dispatch(addBook(book))},
   }
 }
 export default connect(null,mapDispatchToProps)(BooksForm);
