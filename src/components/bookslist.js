@@ -32,7 +32,7 @@ class BooksList extends React.Component {
     }
     return (
       <div>
-        { filterBooks.map((book) => (
+        { filterBooks.map(book => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
         <CategoryFilter onChange={this.handleFilterChange} />
@@ -41,14 +41,14 @@ class BooksList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   books: state.books,
   filter: state.filter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeBook: (id) => dispatch(removeBook(id)),
-  changeFilter: (filter) => dispatch(changeFilter(filter)),
+const mapDispatchToProps = dispatch => ({
+  removeBook: id => dispatch(removeBook(id)),
+  changeFilter: filter => dispatch(changeFilter(filter)),
 });
 
 BooksList.propTypes = {

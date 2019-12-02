@@ -11,7 +11,7 @@ const CategoryFilter = (props) => {
   return (
     <select name="category" onChange={handleChange}>
       <option>All</option>
-      {categories.map((category) => (
+      {categories.map(category => (
         <option key={category}>
           {category}
         </option>
