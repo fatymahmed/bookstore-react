@@ -16,7 +16,7 @@ class BooksForm extends React.Component {
       <form>
         <input type="text" />
         <select>
-          {categories.map((category) => (
+          {categories.map(category => (
             <option key={category.id}>
               {category}
             </option>
