@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import './index.css';
 import bookReducer from './reducers/book';
 import App from './components/app';
+import rootReducer from './reducers/index';
 
 const ids = [];
 
@@ -28,7 +29,7 @@ const initialsBooks = [{
   category: 'History',
 }];
 
-const store = createStore(bookReducer, initialsBooks);
+const store = createStore(rootReducer, initialsBooks);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -39,3 +40,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
+export {generateUniqueId};
