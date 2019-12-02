@@ -1,12 +1,12 @@
 const REMOVE_BOOK = 'REMOVE_BOOK';
 const CREATE_BOOK = 'CREATE_BOOK';
 
-const addBook = book => ({
+const addBook = (book) => ({
   type: CREATE_BOOK,
   book,
 });
 
-const removeBook = id => ({
+const removeBook = (id) => ({
   type: REMOVE_BOOK,
   id,
 });

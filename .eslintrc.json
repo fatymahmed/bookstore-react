@@ -1,3 +1,4 @@
+
 {
     "env": {
       "browser": true,
@@ -16,7 +17,6 @@
     "rules": {
       "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
       "import/no-unresolved": "off",
-      "no-shadow": "off",
-      "react/forbid-prop-types": "off"
+      "no-shadow": "off"
     }
   }
