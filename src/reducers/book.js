@@ -2,7 +2,7 @@ const REMOVE_BOOK = 'REMOVE_BOOK';
 const CREATE_BOOK = 'CREATE_BOOK';
 
 
-const bookReducer = (state = [], action) => {
+const books = (state = [], action) => {
   switch (action.type) {
     case CREATE_BOOK:
       return [...state, action.book];
@@ -14,4 +14,4 @@ const bookReducer = (state = [], action) => {
   }
 };
 
-export default bookReducer;
+export default books;
