@@ -2,9 +2,12 @@
 import React from 'react';
 import BooksList from './bookslist';
 import BooksForm from './book-form';
+import Header from './header';
 
+const style = { width: 1000, margin: 'auto' };
 const App = () => (
-  <div>
+  <div style={style}>
+    <Header />
     <BooksList />
     <BooksForm />
   </div>
