@@ -5,17 +5,7 @@ import { createStore } from 'redux';
 import './index.css';
 import App from './components/app';
 import rootReducer from './reducers/index';
-
-const ids = [];
-
-const generateUniqueId = () => {
-  let number = Math.floor(Math.random() * 100);
-  while (ids.includes(number)) {
-    number = Math.floor(Math.random() * 100);
-  }
-  ids.push(number);
-  return number;
-};
+import generateUniqueId from './idGenerator';
 
 const initialsBooks = [{
   id: generateUniqueId(),
@@ -35,3 +25,5 @@ ReactDOM.render(
     <App />
   </Provider>, document.getElementById('root'),
 );
+
+export default generateUniqueId;
