@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Book from './book';
 import { removeBook } from '../actions/index';
 
-
 class BooksList extends React.Component {
   constructor(props) {
     super(props);

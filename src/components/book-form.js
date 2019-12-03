@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -54,6 +55,7 @@ class BooksForm extends React.Component {
         <select name="category" value={category} onChange={this.handleChange}>
           {categories.map(category => (
             <option key={category}>
+
               {category}
             </option>
           ))}
