@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addBook } from '../actions/index';
 import generateUniqueId from '../idGenerator';
-
-const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
+import { categories } from '../constants';
 
 class BooksForm extends React.Component {
   constructor(props) {

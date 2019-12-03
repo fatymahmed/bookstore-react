@@ -1,5 +1,4 @@
-const REMOVE_BOOK = 'REMOVE_BOOK';
-const CREATE_BOOK = 'CREATE_BOOK';
+import { CREATE_BOOK, REMOVE_BOOK } from '../constants';
 
 const books = (state = [], action) => {
   switch (action.type) {
