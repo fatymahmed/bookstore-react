@@ -1,13 +1,24 @@
 import React from 'react';
 
-const style = { width: 500, display: 'flex', justifyContent: 'space-between' };
+const containerStyle = {
+  backgroundColor: '#ffffff',
+};
+const style = {
+  height: 95,
+  width: 500,
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingLeft: 100,
+};
 const bookstoreStyle = { color: '#0290ff', fontSize: 30, fontWeight: 'bold' };
-const booksStyle = { fontSize: 13, fontWeight: 'normal', color: '#121212', marginTop: 10, letterSpacing: 1.9,
+const booksStyle = {
+  fontSize: 13, fontWeight: 'normal', color: '#121212', marginTop: 5, letterSpacing: 1.9,
 };
 const categoriesSTyle = { ...booksStyle, opacity: 0.5 };
 
 const Header = () => (
-  <div>
+  <div style={containerStyle}>
     <div style={style}>
       <h2 style={bookstoreStyle}>
 Bookstore CMS

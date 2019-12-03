@@ -6,7 +6,7 @@ import Book from './book';
 import CategoryFilter from './category-filter';
 import { removeBook, changeFilter } from '../actions/index';
 
-const style = { backgroundColor: '#fafafa', padding: 20 };
+const style = { backgroundColor: '#fafafa', padding: 20, paddingLeft: 100 };
 class BooksList extends React.Component {
   constructor(props) {
     super(props);
