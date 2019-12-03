@@ -32,7 +32,7 @@ const CategoryFilter = (props) => {
       <span style={spanStyle}>Filter : &nbsp;&nbsp; </span>
       <select style={selectInputStyle} name="category" onChange={handleChange}>
         <option>All</option>
-        {categories.map((category) => (
+        {categories.map(category => (
           <option key={category}>
             {category}
           </option>
