@@ -1,8 +1,15 @@
-import { CREATE_BOOK, REMOVE_BOOK, CHANGE_FILTER } from '../constants';
+import {
+  STORE_BOOKS,
+  REMOVE_BOOK,
+  CHANGE_FILTER,
+  PROCESSING,
+  FETCH_ERROR,
+  FETCH_SUCCESS,
+} from '../constants';
 
-const addBook = book => ({
-  type: CREATE_BOOK,
-  book,
+const storeBooks = books => ({
+  type: STORE_BOOKS,
+  books,
 });
 
 const removeBook = id => ({
@@ -15,8 +22,23 @@ const changeFilter = filter => ({
   filter,
 });
 
+const fetchOnGoing = () => ({
+  type: PROCESSING,
+});
+
+const fetchSuccess = () => ({
+  type: FETCH_SUCCESS,
+});
+
+const fetchFailure = () => ({
+  type: FETCH_ERROR,
+});
+
 export {
-  addBook,
+  storeBooks,
   removeBook,
   changeFilter,
+  fetchFailure,
+  fetchOnGoing,
+  fetchSuccess,
 };
