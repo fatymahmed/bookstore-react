@@ -1,6 +1,4 @@
-import { apiURL } from '../constants';
-
-const get = (onSuccess, onError) => {
+const get = (onSuccess, onError, apiURL) => {
   fetch(apiURL, { method: 'GET' }).then((result) => result.json())
     .then((result) => {
       if (result.error) {
@@ -11,7 +9,7 @@ const get = (onSuccess, onError) => {
     }).catch(error => onError(error));
 };
 
-const post = (onSuccess, onError, data) => {
+const post = (onSuccess, onError, data, apiURL) => {
   fetch(apiURL, {
     method: 'POST',
     headers: {
@@ -22,7 +20,16 @@ const post = (onSuccess, onError, data) => {
     if (result.error) {
       onError();
     } else {
-      console.log(result);
+      onSuccess(result);
+    }
+  }).catch(error => onError(error));
+};
+
+const remove = (onSuccess, onError, apiURL) => {
+  fetch(apiURL, { method: 'DELETE' }).then(response => response.json()).then(result => {
+    if (result.error) {
+      onError();
+    } else {
       onSuccess(result);
     }
   }).catch(error => onError(error));
@@ -31,4 +38,5 @@ const post = (onSuccess, onError, data) => {
 export {
   get,
   post,
+  remove,
 };

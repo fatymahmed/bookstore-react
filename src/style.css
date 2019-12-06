@@ -1,0 +1,159 @@
+.loadingContent{
+    text-align: center;
+}
+
+.loadingImg{
+    width: 400px; 
+    height: 400px;
+}
+
+.bookList{
+    background-color: #fafafa;
+    padding: 20px;
+    padding-left: 100px;
+}
+
+.container {
+    padding-left: 100px;
+  }
+
+.formTitle{
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.18px;
+    color: #888888;
+    margin-top: 29px;
+    margin-bottom: 29px;
+  }
+.titleInput  {
+    width: 554;
+    height: 45;
+    border-radius: 4px;
+    border: 1px solid #e8e8e8;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    letter-spacing: -0.15px;
+    color: #000000;
+  }
+.categoryInput  {
+    width: 285px;
+    height: 45px;
+    border-radius: 4px;
+    border: 1px solid #e8e8e8;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    letter-spacing: -0.15px;
+    color: #000000;
+    opacity: 0.6px;
+    margin-left: 30px;
+}
+.categoryFilter{
+    width: 100px;
+    height: 45px;
+}
+
+.submitButton  {
+    width: 184px;
+    height: 45px;
+    border-radius: 3px;
+    background-color: #0290ff;
+    border: none;
+    color: white;
+    margin-left: 30px;
+    padding: 10px;
+  }
+
+  .app{
+    width: 1200px;
+    margin: auto;
+    padding-bottom: 100px;
+    background-color: #fafafa;
+  }
+
+  hr{
+    height: 2px;
+    border: 1px solid #e8e8e8;
+    margin-left: 100px;
+  }
+
+
+.book{
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+.category{
+    color: #121212;
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0.5;
+  }
+.title{
+    color: #121212;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: -0.2px;
+    text-transform: capitalize;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+.button{
+    color: #4386bf;
+    border: none;
+    background-color: #ffffff;
+    font-size: 14px;
+    font-weight: 300px;
+}
+
+span{
+    padding-top: 15px;
+}
+
+.categoryFilterContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.header-container{
+    background-color: #ffffff;
+
+}
+.header {
+    height: 95px;
+
+    width: 500px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-left: 100px;
+
+  }
+.bookstore{
+    color: #0290ff;
+    font-size: 30;
+    font-weight: bold 
+}
+.books, .categories {
+    font-size: 13px;
+    font-weight: normal;
+    color: #121212;
+    margin-top: 5px;
+    letter-spacing: 1.9px;
+
+  }
+.categories
+{
+     opacity: 0.5
+     }
+  

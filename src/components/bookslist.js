@@ -12,9 +12,12 @@ import {
   fetchFailure,
   storeBooks,
 } from '../actions/index';
-import { get } from '../services/api-service';
+import { get, remove } from '../services/api-service';
+import { apiURL } from '../constants';
+import '../style.css';
 
-const style = { backgroundColor: '#fafafa', padding: 20, paddingLeft: 100 };
+const imgSrc = require('../loading.jpg');
+
 class BooksList extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +30,7 @@ class BooksList extends React.Component {
   componentDidMount() {
     const { fetchOnGoing } = this.props;
     fetchOnGoing();
-    get(this.onFetchSuccess, this.onFetchFailure);
+    get(this.onFetchSuccess, this.onFetchFailure, apiURL);
   }
 
   onFetchSuccess(data) {
@@ -42,8 +45,10 @@ class BooksList extends React.Component {
   }
 
   handleRemoveBook(book) {
-    const { removeBook } = this.props;
-    removeBook(book.id);
+    const { fetchOnGoing } = this.props;
+    fetchOnGoing();
+    const apiURLwithID = `${apiURL}/${book.id}`;
+    remove(this.onFetchSuccess, this.onFetchFailure, apiURLwithID);
   }
 
   handleFilterChange(filter) {
@@ -52,13 +57,18 @@ class BooksList extends React.Component {
   }
 
   render() {
-    const { books, filter } = this.props;
+    const { books, filter, apis } = this.props;
     let filterBooks = books;
+    if (apis === 'processing') {
+      return (
+        <div className="loadingContent"><img className="loadingImg" src={imgSrc} alt="loading" /></div>
+      );
+    }
     if (filter !== 'All') {
       filterBooks = books.filter((book) => book.category === filter);
     }
     return (
-      <div style={style}>
+      <div className="bookList">
         { filterBooks.map((book) => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
@@ -85,13 +95,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 BooksList.propTypes = {
   books: PropTypes.array.isRequired,
-  removeBook: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
   fetchSuccess: PropTypes.func.isRequired,
   fetchFailure: PropTypes.func.isRequired,
   fetchOnGoing: PropTypes.func.isRequired,
   storeBooks: PropTypes.func.isRequired,
   filter: PropTypes.string,
+  apis: PropTypes.string.isRequired,
 };
 BooksList.defaultProps = {
   filter: 'All',
