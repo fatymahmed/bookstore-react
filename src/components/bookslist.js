@@ -65,11 +65,11 @@ class BooksList extends React.Component {
       );
     }
     if (filter !== 'All') {
-      filterBooks = books.filter((book) => book.category === filter);
+      filterBooks = books.filter(book => book.category === filter);
     }
     return (
       <div className="bookList">
-        { filterBooks.map((book) => (
+        { filterBooks.map(book => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
         <CategoryFilter onChange={this.handleFilterChange} filter={filter} />
@@ -78,13 +78,13 @@ class BooksList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   books: state.books,
   filter: state.filter,
   apis: state.apis,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   removeBook: id => dispatch(removeBook(id)),
   changeFilter: filter => dispatch(changeFilter(filter)),
   fetchOnGoing: () => dispatch(fetchOnGoing()),
