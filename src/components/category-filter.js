@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { categories } from '../constants';
 
 const CategoryFilter = (props) => {
-  const { onChange } = props;
+  const { onChange, filter } = props;
   const handleChange = (event) => {
     const { value } = event.target;
     onChange(value);
@@ -11,7 +11,7 @@ const CategoryFilter = (props) => {
   return (
     <div className="categoryFilterContainer">
       <span>Filter : &nbsp;&nbsp; </span>
-      <select className="categoryInput categoryFilter" name="category" onChange={handleChange}>
+      <select className="categoryInput categoryFilter" value={filter} name="category" onChange={handleChange}>
         <option>All</option>
         {categories.map(category => (
           <option key={category}>
@@ -26,6 +26,7 @@ const CategoryFilter = (props) => {
 
 CategoryFilter.propTypes = {
   onChange: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 export default CategoryFilter;

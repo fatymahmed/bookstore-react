@@ -72,7 +72,7 @@ class BooksList extends React.Component {
         { filterBooks.map((book) => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
-        <CategoryFilter onChange={this.handleFilterChange} />
+        <CategoryFilter onChange={this.handleFilterChange} filter={filter} />
       </div>
     );
   }
