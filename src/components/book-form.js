@@ -4,7 +4,53 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addBook } from '../actions/index';
 import generateUniqueId from '../idGenerator';
-import { categories } from '../constants';
+import { categories, bookFormTitle, inputPlaceHolder } from '../constants';
+
+const containerStyle = {
+  paddingLeft: 100,
+};
+const formTitleStyle = {
+  fontSize: 20,
+  fontWeight: 'bold',
+  letterSpacing: -0.18,
+  color: '#888888',
+  marginTop: 29,
+  marginBottom: 29,
+};
+const titleInputStyle = {
+  width: 554,
+  height: 45,
+  borderRadius: 4,
+  border: '1px solid #e8e8e8',
+  backgroundColor: '#ffffff',
+  padding: 10,
+  fontSize: 16,
+  letterSpacing: -0.15,
+  color: '#00000',
+};
+const categoryInputStyle = {
+  width: 285,
+  height: 45,
+  borderRadius: 4,
+  border: '1px solid #e8e8e8',
+  backgroundColor: '#ffffff',
+  padding: 10,
+  fontSize: 16,
+  letterSpacing: -0.15,
+  color: '#00000',
+  opacity: 0.6,
+  marginLeft: 30,
+};
+const submitButtonStyle = {
+  width: 184,
+  height: 45,
+  borderRadius: 3,
+  backgroundColor: '#0290ff',
+  border: 'none',
+  color: 'white',
+  marginLeft: 30,
+  padding: 10,
+};
 
 class BooksForm extends React.Component {
   constructor(props) {
@@ -49,9 +95,10 @@ class BooksForm extends React.Component {
   render() {
     const { title, category } = this.state;
     return (
-      <form>
-        <input type="text" name="title" value={title} onChange={this.handleChange} />
-        <select name="category" value={category} onChange={this.handleChange}>
+      <div style={containerStyle}>
+        <p style={formTitleStyle}>{bookFormTitle}</p>
+        <input type="text" placeholder={inputPlaceHolder} name="title" style={titleInputStyle} value={title} onChange={this.handleChange} />
+        <select style={categoryInputStyle} name="category" value={category} onChange={this.handleChange}>
           {categories.map(category => (
             <option key={category}>
 
@@ -59,10 +106,10 @@ class BooksForm extends React.Component {
             </option>
           ))}
         </select>
-        <button type="button" onClick={this.handleSubmit}>
-        Submit
+        <button style={submitButtonStyle} type="button" onClick={this.handleSubmit}>
+        ADD BOOK
         </button>
-      </form>
+      </div>
     );
   }
 }

@@ -6,6 +6,7 @@ import Book from './book';
 import CategoryFilter from './category-filter';
 import { removeBook, changeFilter } from '../actions/index';
 
+const style = { backgroundColor: '#fafafa', padding: 20, paddingLeft: 100 };
 class BooksList extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +31,7 @@ class BooksList extends React.Component {
       filterBooks = books.filter(book => book.category === filter);
     }
     return (
-      <div>
+      <div style={style}>
         { filterBooks.map(book => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
