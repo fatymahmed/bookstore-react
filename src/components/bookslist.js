@@ -39,7 +39,7 @@ class BooksList extends React.Component {
     storeBooks(data);
   }
 
-  onFetchFailure(error) {
+  onFetchFailure() {
     const { fetchFailure } = this.props;
     fetchFailure();
   }

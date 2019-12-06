@@ -33,14 +33,10 @@ class BooksForm extends React.Component {
     storeBooks(data);
   }
 
-  onFailurePost() {
-
-  }
-
   handleSubmit() {
     const { fetchOnGoing } = this.props;
     fetchOnGoing();
-    post(this.onSuccessPost, this.onSuccessPost, this.createBook(), apiURL);
+    post(this.onSuccessPost, () => {}, this.createBook(), apiURL);
     this.resetStates();
   }
 
@@ -93,6 +89,7 @@ class BooksForm extends React.Component {
 BooksForm.propTypes = {
   fetchOnGoing: PropTypes.func.isRequired,
   storeBooks: PropTypes.func.isRequired,
+  fetchSuccess: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -8,8 +8,6 @@ const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learnin
 const bookFormTitle = 'ADD NEW BOOK';
 const inputPlaceHolder = 'Book Title';
 
-//const apiURL = 'http://localhost:3000/books';
-
 const apiURL = 'https://bookstore-backends.herokuapp.com/books';
 
 export {
