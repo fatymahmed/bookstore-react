@@ -4,19 +4,51 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Book from './book';
 import CategoryFilter from './category-filter';
-import { removeBook, changeFilter } from '../actions/index';
+import {
+  removeBook,
+  changeFilter,
+  fetchOnGoing,
+  fetchSuccess,
+  fetchFailure,
+  storeBooks,
+} from '../actions/index';
+import { get, remove } from '../services/api-service';
+import { apiURL } from '../constants';
+import '../style.css';
 
-const style = { backgroundColor: '#fafafa', padding: 20, paddingLeft: 100 };
+const imgSrc = require('../loading.jpg');
+
 class BooksList extends React.Component {
   constructor(props) {
     super(props);
     this.handleRemoveBook = this.handleRemoveBook.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.onFetchFailure = this.onFetchFailure.bind(this);
+    this.onFetchSuccess = this.onFetchSuccess.bind(this);
+  }
+
+  componentDidMount() {
+    const { fetchOnGoing } = this.props;
+    fetchOnGoing();
+    get(this.onFetchSuccess, this.onFetchFailure, apiURL);
+  }
+
+  onFetchSuccess(data) {
+    const { fetchSuccess, storeBooks } = this.props;
+    fetchSuccess();
+    storeBooks(data);
+  }
+
+  onFetchFailure() {
+    const { fetchFailure } = this.props;
+    fetchFailure();
   }
 
   handleRemoveBook(book) {
-    const { removeBook } = this.props;
-    removeBook(book.id);
+    const { fetchOnGoing } = this.props;
+    fetchOnGoing();
+    const apiURLwithID = `${apiURL}/${book.id}`;
+    remove(this.onFetchSuccess, this.onFetchFailure, apiURLwithID);
   }
 
   handleFilterChange(filter) {
@@ -25,17 +57,22 @@ class BooksList extends React.Component {
   }
 
   render() {
-    const { books, filter } = this.props;
+    const { books, filter, apis } = this.props;
     let filterBooks = books;
+    if (apis === 'processing') {
+      return (
+        <div className="loadingContent"><img className="loadingImg" src={imgSrc} alt="loading" /></div>
+      );
+    }
     if (filter !== 'All') {
       filterBooks = books.filter(book => book.category === filter);
     }
     return (
-      <div style={style}>
+      <div className="bookList">
         { filterBooks.map(book => (
           <Book key={book.id} book={book} onClick={this.handleRemoveBook} />
         ))}
-        <CategoryFilter onChange={this.handleFilterChange} />
+        <CategoryFilter onChange={this.handleFilterChange} filter={filter} />
       </div>
     );
   }
@@ -44,18 +81,27 @@ class BooksList extends React.Component {
 const mapStateToProps = state => ({
   books: state.books,
   filter: state.filter,
+  apis: state.apis,
 });
 
 const mapDispatchToProps = dispatch => ({
   removeBook: id => dispatch(removeBook(id)),
   changeFilter: filter => dispatch(changeFilter(filter)),
+  fetchOnGoing: () => dispatch(fetchOnGoing()),
+  fetchFailure: () => dispatch(fetchFailure()),
+  fetchSuccess: () => dispatch(fetchSuccess()),
+  storeBooks: books => dispatch(storeBooks(books)),
 });
 
 BooksList.propTypes = {
   books: PropTypes.array.isRequired,
-  removeBook: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
+  fetchSuccess: PropTypes.func.isRequired,
+  fetchFailure: PropTypes.func.isRequired,
+  fetchOnGoing: PropTypes.func.isRequired,
+  storeBooks: PropTypes.func.isRequired,
   filter: PropTypes.string,
+  apis: PropTypes.string.isRequired,
 };
 BooksList.defaultProps = {
   filter: 'All',

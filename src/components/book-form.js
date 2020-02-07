@@ -2,55 +2,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addBook } from '../actions/index';
 import generateUniqueId from '../idGenerator';
-import { categories, bookFormTitle, inputPlaceHolder } from '../constants';
-
-const containerStyle = {
-  paddingLeft: 100,
-};
-const formTitleStyle = {
-  fontSize: 20,
-  fontWeight: 'bold',
-  letterSpacing: -0.18,
-  color: '#888888',
-  marginTop: 29,
-  marginBottom: 29,
-};
-const titleInputStyle = {
-  width: 554,
-  height: 45,
-  borderRadius: 4,
-  border: '1px solid #e8e8e8',
-  backgroundColor: '#ffffff',
-  padding: 10,
-  fontSize: 16,
-  letterSpacing: -0.15,
-  color: '#00000',
-};
-const categoryInputStyle = {
-  width: 285,
-  height: 45,
-  borderRadius: 4,
-  border: '1px solid #e8e8e8',
-  backgroundColor: '#ffffff',
-  padding: 10,
-  fontSize: 16,
-  letterSpacing: -0.15,
-  color: '#00000',
-  opacity: 0.6,
-  marginLeft: 30,
-};
-const submitButtonStyle = {
-  width: 184,
-  height: 45,
-  borderRadius: 3,
-  backgroundColor: '#0290ff',
-  border: 'none',
-  color: 'white',
-  marginLeft: 30,
-  padding: 10,
-};
+import {
+  categories, bookFormTitle, inputPlaceHolder, apiURL,
+} from '../constants';
+import { post } from '../services/api-service';
+import {
+  fetchOnGoing,
+  fetchSuccess,
+  fetchFailure,
+  storeBooks,
+} from '../actions/index';
+import '../style.css';
 
 class BooksForm extends React.Component {
   constructor(props) {
@@ -61,14 +24,22 @@ class BooksForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onSuccessPost = this.onSuccessPost.bind(this);
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
+  onSuccessPost(data) {
+    const { fetchSuccess, storeBooks } = this.props;
+    fetchSuccess();
+    storeBooks(data);
   }
+
+  handleSubmit() {
+    const { fetchOnGoing } = this.props;
+    fetchOnGoing();
+    post(this.onSuccessPost, () => {}, this.createBook(), apiURL);
+    this.resetStates();
+  }
+
 
   createBook() {
     const { title, category } = this.state;
@@ -86,19 +57,20 @@ class BooksForm extends React.Component {
     });
   }
 
-  handleSubmit() {
-    const { addNewBook } = this.props;
-    addNewBook(this.createBook());
-    this.resetStates();
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
     const { title, category } = this.state;
     return (
-      <div style={containerStyle}>
-        <p style={formTitleStyle}>{bookFormTitle}</p>
-        <input type="text" placeholder={inputPlaceHolder} name="title" style={titleInputStyle} value={title} onChange={this.handleChange} />
-        <select style={categoryInputStyle} name="category" value={category} onChange={this.handleChange}>
+      <div className="container">
+        <p className="formTitle">{bookFormTitle}</p>
+        <input type="text" placeholder={inputPlaceHolder} name="title" className="titleInput" value={title} onChange={this.handleChange} />
+        <select className="categoryInput" name="category" value={category} onChange={this.handleChange}>
           {categories.map(category => (
             <option key={category}>
 
@@ -106,7 +78,7 @@ class BooksForm extends React.Component {
             </option>
           ))}
         </select>
-        <button style={submitButtonStyle} type="button" onClick={this.handleSubmit}>
+        <button className="submitButton" type="button" onClick={this.handleSubmit}>
         ADD BOOK
         </button>
       </div>
@@ -115,10 +87,16 @@ class BooksForm extends React.Component {
 }
 
 BooksForm.propTypes = {
-  addNewBook: PropTypes.func.isRequired,
+  fetchOnGoing: PropTypes.func.isRequired,
+  storeBooks: PropTypes.func.isRequired,
+  fetchSuccess: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  addNewBook: (book) => { dispatch(addBook(book)); },
+  fetchOnGoing: () => dispatch(fetchOnGoing()),
+  fetchFailure: () => dispatch(fetchFailure()),
+  fetchSuccess: () => dispatch(fetchSuccess()),
+  storeBooks: books => dispatch(storeBooks(books)),
 });
+
 export default connect(null, mapDispatchToProps)(BooksForm);

@@ -1,9 +1,9 @@
-import { CREATE_BOOK, REMOVE_BOOK } from '../constants';
+import { STORE_BOOKS, REMOVE_BOOK } from '../constants';
 
 const books = (state = [], action) => {
   switch (action.type) {
-    case CREATE_BOOK:
-      return [...state, action.book];
+    case STORE_BOOKS:
+      return action.books;
     case REMOVE_BOOK:
       return (state.filter(x => x.id !== action.id));
     default:
