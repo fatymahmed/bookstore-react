@@ -29,14 +29,14 @@ const Book = (props) => {
       </div>
       <div className="flex-display">
         <div className="progress-bar flex-display">
-          <div className="completition-bar"/>
+          <div className="completition-bar" />
           <div className="completed-progress">
             <p className="percentage ">75%</p>
             <p className="completed opacity-val">Completed</p>
           </div>
         </div>
         <div>
-          <div className="vertical-line opacity-val"/>
+          <div className="vertical-line opacity-val" />
           <div>
             <p className="progress-title opacity-val margin-botton">
               CURRENT CHAPTER
@@ -47,12 +47,12 @@ const Book = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-}
+};
 
-export default Book
+export default Book;
